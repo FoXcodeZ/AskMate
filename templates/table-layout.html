@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AskMate - {% block title %} Home {% endblock %}</title>
+    {% block style %}<link rel="stylesheet" href="/static/css/default_style.css">{% endblock %}
+    {% block fontawesome %}<script src="https://kit.fontawesome.com/23875a7b1a.js" crossorigin="anonymous"></script> {% endblock %}
+    {% block sorttable %} <script src="/static/scripts/sorttable.js"></script> {% endblock %}
+</head>
+<body>
+<h1>Ask<span class="yellow">Mate</span></h1>
+<nav id="navbar">
+    <ul>
+        <li><a href="{{ url_for('index') }}" >Home</a></li>
+        <li><a href="{{ url_for('display_all_questions') }}" >All Questions</a></li>
+        <li><a href="{{ url_for('add_question') }}" >Add question</a></li>
+    </ul>
+</nav>
+<table class="container sortable" >
+        <thead>
+            <tr>
+                <th >Id: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Time: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Title: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Views: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Votes: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Vote</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% block content %}
+
+        {% endblock %}
+        </tbody>
+</table>
+</body>
+</html>

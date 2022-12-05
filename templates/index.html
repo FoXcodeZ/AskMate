@@ -1,0 +1,18 @@
+{% extends "table-layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    {% for row in last_5_questions %}
+        <tr>
+            <td> {{  row['id'] }} </td>
+            <td> {{  row['submission_time'] }}</td>
+            <td><a href="{{ url_for('display_question', question_id=row['id']) }}">{{ row['title'] }}</a></td>
+            <td> {{  row['view_number'] }}</td>
+            <td> {{  row['vote_number'] }}</td>
+            <td><i class="fa-regular fa-circle-down"></i> <i class="fa-regular fa-circle-up"></i></td>
+        </tr>
+    {% endfor %}
+{% endblock %}

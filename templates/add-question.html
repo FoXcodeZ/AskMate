@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="qestform">
+        <form action="{{ url_for("add_question") }}" method="POST">
+            <h3>Add Question:</h3>
+            <input class="mid" name="title" type="text" placeholder="Title" required minlength="1"/>
+            <br /><br />
+            <textarea class="mid" name="message" cols="50" rows="20" required minlength="10" placeholder="Message"></textarea>
+            <br /><br />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

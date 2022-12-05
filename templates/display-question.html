@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    {% for row in question %}
+        <h3>{{ row['title'] }}</h3>
+        <p>{{ row['message'] }}</p>
+    {% endfor %}
+    <h3>Answers:</h3>
+    <table class="container">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Time</th>
+                <th>Message</th>
+                <th>Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%  for row in answers %}
+                <tr>
+                    <td>{{ row['id'] }}</td>
+                    <td>{{ row['submission_time'] }}</td>
+                    <td>{{ row['message'] }}</td>
+                    <td>{{ row['vote_number'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% for row in question %}
+    <nav id="navbar">
+        <ul>
+            <li><a href="{{ url_for('add_answer', question_id=row['id']) }}" >Add Answer</a></li>
+            <li><a href="{{ url_for('delete_question', question_id=row['id']) }}" >Delete Question</a></li>
+        </ul>
+    </nav>
+{% endfor %}
+{% endblock %}
