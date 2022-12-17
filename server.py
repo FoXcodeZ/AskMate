@@ -21,6 +21,7 @@ def display_all_questions():
 def display_question(question_id):
     question = data_manager.get_question_by_id(question_id)
     answers = data_manager.get_all_answers_to_question(question_id)
+    data_manager.count_nr_of_views(question_id)
     return render_template('display-question.html', question_id=question_id, question=question,
                            answers=answers, title='Display Question')
 
@@ -48,6 +49,20 @@ def add_answer(question_id):
 def delete_question(question_id):
     data_manager.delete_question(question_id)
     return redirect(url_for('display_all_questions', title="Delete Question"))
+
+
+@app.route('//question/<question_id>/vote-up')
+def vote_up_question(question_id):
+    data_manager.vote_up_question(question_id)
+    last_5_questions = data_manager.get_last_5_questions()
+    return render_template('index.html', last_5_questions=last_5_questions, title="Home")
+
+
+@app.route('//question/<question_id>/vote-down')
+def vote_down_question(question_id):
+    data_manager.vote_down_question(question_id)
+    last_5_questions = data_manager.get_last_5_questions()
+    return render_template('index.html', last_5_questions=last_5_questions, title="Home")
 
 
 if __name__ == '__main__':

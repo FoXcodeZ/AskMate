@@ -67,3 +67,30 @@ def delete_question(cursor, question_id):
     DELETE FROM answer WHERE question_id = %(question_id)s;
     DELETE FROM question WHERE id = %(question_id)s """,
                    {'question_id': question_id})
+
+
+@connection.connection_handler
+def count_nr_of_views(cursor, question_id):
+    cursor.execute("""
+    UPDATE question
+    SET view_number = view_number + 1
+    WHERE id = %(question_id)s """,
+                   {'question_id': question_id})
+
+
+@connection.connection_handler
+def vote_up_question(cursor, question_id,):
+    cursor.execute("""
+    UPDATE question
+    SET vote_number = vote_number + 1
+    WHERE id = %(question_id)s """,
+                   {'question_id': question_id})
+
+
+@connection.connection_handler
+def vote_down_question(cursor, question_id):
+    cursor.execute("""
+    UPDATE question
+    SET vote_number = vote_number - 1
+    WHERE id = %(question_id)s """,
+                   {'question_id': question_id})
