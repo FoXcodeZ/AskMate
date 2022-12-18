@@ -102,6 +102,7 @@ h2 a
     -webkit-box-shadow: 0 2px 2px -2px #0E1119;
     -moz-box-shadow: 0 2px 2px -2px #0E1119;
     box-shadow: 0 2px 2px -2px #0E1119;
+    padding: 1em 1em 1em 1em;
 }
 
 .container
@@ -149,7 +150,7 @@ h2 a
 {
     padding-bottom: 1%;
     padding-top: 1%;
-    padding-left:1%;
+    padding-left: 1%;
 }
 
 .container td, .container a
@@ -180,12 +181,12 @@ h2 a
     background-color: #1F2739;
 }
 
-/*
+
 .container td:first-child
 {
     color: #FB667A;
+    padding: 2em;
 }
-*/
 
 .toolbox:hover
 {

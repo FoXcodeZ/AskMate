@@ -4,6 +4,12 @@
     {{ title }}
 {% endblock %}
 
+{% if user != None %}
+    {% block user_block %}
+        {{  user }}
+    {% endblock %}
+{% endif %}
+
 {% block content %}
     <div class="qestform">
         <form action="{{ url_for("add_question") }}" method="POST">
