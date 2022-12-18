@@ -11,10 +11,12 @@
 <h1>Ask<span class="yellow">Mate</span></h1>
 <nav id="navbar">
     <ul>
-        <li><a href="{{ url_for('index') }}" >Home</a></li>
-        <li><a href="{{ url_for('display_all_questions') }}" >All Questions</a></li>
-        <li><a href="{{ url_for('add_question') }}" >Add question</a></li>
-        <li><a href="{{ url_for('registration') }}" >Register</a></li>
+        <li><a href="{{ url_for('index') }}" ><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="{{ url_for('display_all_questions') }}" ><i class="fa-solid fa-table-cells"></i> All Questions</a></li>
+        <li><a href="{{ url_for('add_question') }}" ><i class="fa-regular fa-square-plus"></i> Add question</a></li>
+        <li><a href="{{ url_for('list_users') }}" ><i class="fa-solid fa-users"></i> Users</a></li>
+        <li><a href="{{ url_for('registration') }}" ><i class="fa-solid fa-key"></i> Register</a></li>
+        <li><a href="{{ url_for('login') }}" ><i class="fa-solid fa-lock"></i> Login</a></li>
     </ul>
 </nav>
 <table class="container sortable" >

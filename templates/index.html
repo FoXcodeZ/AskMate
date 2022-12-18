@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    <h1>User: {{ session['username'] }}</h1>
     {% for row in last_5_questions %}
         <tr>
             <td> {{  row['id'] }} </td>

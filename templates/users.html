@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <table class="container sortable" >
+        <thead>
+            <tr>
+                <th >Id: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Name: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Register data: <i class="fa-solid fa-sort toolbox"></i></th>
+                <th>Email: <i class="fa-solid fa-sort toolbox"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in all_users %}
+            <tr>
+                <td> {{  row['user_id'] }} </td>
+                <td> {{  row['user_name'] }} </td>
+                <td> {{  row['reg_date'] }} </td>
+                <td> {{  row['user_email'] }} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+{% endblock %}

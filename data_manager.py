@@ -94,3 +94,19 @@ def vote_down_question(cursor, question_id):
     SET vote_number = vote_number - 1
     WHERE id = %(question_id)s """,
                    {'question_id': question_id})
+
+
+@connection.connection_handler
+def register_user(cursor, user_name, user_email):
+    date = util.get_linux_timestamp()
+    cursor.execute("""
+    INSERT INTO users(reg_date, user_name, user_email)
+    VALUES(%(reg_date)s, %(user_name)s, %(user_email)s)""",
+                   {'user_name': user_name, 'reg_date': date, 'user_email': user_email})
+
+
+@connection.connection_handler
+def get_all_users(cursor):
+    cursor.execute("""
+    SELECT * FROM users""")
+    return cursor.fetchall()

@@ -1,15 +1,17 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, session, render_template, request, escape, url_for, redirect
 import data_manager
 
 app = Flask(__name__)
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def index():
-
     last_5_questions = data_manager.get_last_5_questions()
-    return render_template('index.html', last_5_questions=last_5_questions, title="Home")
+    if 'username' in session:
+        return render_template('index.html', last_5_questions=last_5_questions, title="Home", user=session['username'])
+    else:
+        return render_template('index.html', last_5_questions=last_5_questions, title="Home")
 
 
 @app.route('/display_all_questions')
@@ -46,25 +48,43 @@ def add_answer(question_id):
     return redirect(url_for("display_question", question_id=question_id, title="Display Question"))
 
 
-@app.route('//question/<question_id>/delete', methods=['GET', 'POST'])
+@app.route('/question/<question_id>/delete', methods=['GET', 'POST'])
 def delete_question(question_id):
     data_manager.delete_question(question_id)
     return redirect(url_for('display_all_questions', title="Delete Question"))
 
 
-@app.route('//question/<question_id>/<template_name>/vote-up')
+@app.route('/question/<question_id>/<template_name>/vote-up')
 def vote_up_question(question_id, template_name):
     data_manager.vote_up_question(question_id)
     return display_current_template(template_name)
 
 
-@app.route('//registration')
+@app.route('/registration', methods=['GET', 'POST'])
 def registration():
+    if request.method == 'GET':
+        print("NONE")
+        return render_template('registration.html', title="Registration")
+    else:
+        print("YES")
+        user_name = request.form['user_name']
+        user_email = request.form['user_email']
+        password_1 = request.form['password_1']
+        password_2 = request.form['password_2']
 
-    return render_template('registration.html')
+        data_manager.register_user(user_name, user_email)
+        return redirect(url_for('index', title="Home"))
 
 
-@app.route('//question/<question_id>/<template_name>/vote-down')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html', title="Login")
+    session['username'] = request.form['user_name']
+    return redirect(url_for('index', user=session['username']))
+
+
+@app.route('/question/<question_id>/<template_name>/vote-down')
 def vote_down_question(question_id, template_name):
     data_manager.vote_down_question(question_id)
     return display_current_template(template_name)
@@ -77,6 +97,10 @@ def display_current_template(template_name):
         return display_all_questions()
 
 
+@app.route('/list_users')
+def list_users():
+    all_users = data_manager.get_all_users()
+    return render_template('users.html', all_users=all_users)
 
 
 if __name__ == '__main__':
