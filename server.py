@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/index')
 def index():
+
     last_5_questions = data_manager.get_last_5_questions()
     return render_template('index.html', last_5_questions=last_5_questions, title="Home")
 
@@ -51,18 +52,23 @@ def delete_question(question_id):
     return redirect(url_for('display_all_questions', title="Delete Question"))
 
 
-@app.route('//question/<question_id>/vote-up')
-def vote_up_question(question_id):
+@app.route('//question/<question_id>/<template_name>/vote-up')
+def vote_up_question(question_id, template_name):
     data_manager.vote_up_question(question_id)
-    last_5_questions = data_manager.get_last_5_questions()
-    return render_template('index.html', last_5_questions=last_5_questions, title="Home")
+    return display_current_template(template_name)
 
 
-@app.route('//question/<question_id>/vote-down')
-def vote_down_question(question_id):
+@app.route('//question/<question_id>/<template_name>/vote-down')
+def vote_down_question(question_id, template_name):
     data_manager.vote_down_question(question_id)
-    last_5_questions = data_manager.get_last_5_questions()
-    return render_template('index.html', last_5_questions=last_5_questions, title="Home")
+    return display_current_template(template_name)
+
+
+def display_current_template(template_name):
+    if template_name == "index.html":
+        return index()
+    else:
+        return display_all_questions()
 
 
 if __name__ == '__main__':
