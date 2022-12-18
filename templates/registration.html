@@ -9,13 +9,13 @@
         <form action="{{ url_for("registration") }}" method="POST">
             <h3>Register user:</h3>
             <br />
-            <input type="text" id="user_name" name="user_name" placeholder="Name"/>
+            <input type="text" minlength=4 id="user_name" name="user_name" placeholder="Name"/>
             <br />
-            <input type="text" id="user_email" name="user_email" placeholder="Email"/>
+            <input type="text" id="user_email" minlength=6 name="user_email" placeholder="Email"/>
             <br />
-            <input type="password" id="password_1" name="password_1" placeholder="Password"/>
+            <input type="password" minlength=6 id="password_1" name="password_1" placeholder="Password"/>
             <br />
-            <input type="password" id="password_2" name="password_2" placeholder="Retype password"/>
+            <input type="password" minlength=6 id="password_2" name="password_2" placeholder="Retype password"/>
             <br />
             <button type="submit">Register</button>
         </form>

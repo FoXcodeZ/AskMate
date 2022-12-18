@@ -3,9 +3,13 @@
 {% block title %}
     {{ title }}
 {% endblock %}
-
+{% if user != None %}
+    {% block user_block %}
+        {{  user }}
+    {% endblock %}
+{% endif %}
 {% block content %}
-    <h1>User: {{ session['username'] }}</h1>
+    <h1>User: {{ user }}</h1>
     {% for row in last_5_questions %}
         <tr>
             <td> {{  row['id'] }} </td>

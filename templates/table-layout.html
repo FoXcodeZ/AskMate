@@ -15,8 +15,14 @@
         <li><a href="{{ url_for('display_all_questions') }}" ><i class="fa-solid fa-table-cells"></i> All Questions</a></li>
         <li><a href="{{ url_for('add_question') }}" ><i class="fa-regular fa-square-plus"></i> Add question</a></li>
         <li><a href="{{ url_for('list_users') }}" ><i class="fa-solid fa-users"></i> Users</a></li>
-        <li><a href="{{ url_for('registration') }}" ><i class="fa-solid fa-key"></i> Register</a></li>
-        <li><a href="{{ url_for('login') }}" ><i class="fa-solid fa-lock"></i> Login</a></li>
+
+        {% if user==None %}
+            <li><a href="{{ url_for('registration') }}" ><i class="fa-solid fa-key"></i> Register</a></li>
+            <li><a href="{{ url_for('login') }}" ><i class="fa-solid fa-lock"></i> Login</a></li>
+        {% else %}
+            <li><a href="{{ url_for('logout') }}" ><i class="fa-solid fa-lock"></i> {% block user_block %}{% endblock %} - Logout</a></li>
+        {% endif %}
+
     </ul>
 </nav>
 <table class="container sortable" >

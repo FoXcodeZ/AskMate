@@ -97,12 +97,32 @@ def vote_down_question(cursor, question_id):
 
 
 @connection.connection_handler
-def register_user(cursor, user_name, user_email):
+def register_user(cursor, user_name, user_email, hashed_password):
     date = util.get_linux_timestamp()
     cursor.execute("""
-    INSERT INTO users(reg_date, user_name, user_email)
-    VALUES(%(reg_date)s, %(user_name)s, %(user_email)s)""",
-                   {'user_name': user_name, 'reg_date': date, 'user_email': user_email})
+    INSERT INTO users(reg_date, user_name, user_email, user_password)
+    VALUES(%(reg_date)s, %(user_name)s, %(user_email)s, %(user_password)s)""",
+                   {'user_name': user_name, 'reg_date': date, 'user_email': user_email,
+                    'user_password': hashed_password})
+
+
+@connection.connection_handler
+def get_user_id(cursor, user_name):
+    cursor.execute("""
+    SELECT user_id FROM users
+    WHERE user_name = %(user_name)s """,
+                   {'user_name': user_name})
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_user_password(cursor, user_name):
+    cursor.execute("""
+    SELECT user_password FROM users
+    WHERE user_name = %(user_name)s """,
+                   {'user_name': user_name})
+    hashed_password = cursor.fetchone()
+    return hashed_password['user_password']
 
 
 @connection.connection_handler
