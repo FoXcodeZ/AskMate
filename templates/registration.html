@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="qestform">
+        <form action="{{ url_for("index") }}" method="POST">
+            <h3>Register user:</h3>
+            <br />
+            <input type="text" id="name" placeholder="Name"/>
+            <br />
+            <input type="text" id="email" placeholder="Email"/>
+            <br />
+            <input type="password" id="password1" placeholder="Password"/>
+            <br />
+            <input type="password" id="password2" placeholder="Retype password"/>
+            <br />
+            <button type="submit">Register</button>
+        </form>
+    </div>
+{% endblock %}

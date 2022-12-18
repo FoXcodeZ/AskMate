@@ -128,7 +128,7 @@ h2 a
     font-size: 2em;
 }
 
-.qestform input[type="text"]
+.qestform input[type="text"], input[type="password"]
 {
     font-size: 1.9em;
 }

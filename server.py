@@ -58,6 +58,12 @@ def vote_up_question(question_id, template_name):
     return display_current_template(template_name)
 
 
+@app.route('//registration')
+def registration():
+
+    return render_template('registration.html')
+
+
 @app.route('//question/<question_id>/<template_name>/vote-down')
 def vote_down_question(question_id, template_name):
     data_manager.vote_down_question(question_id)
@@ -69,6 +75,8 @@ def display_current_template(template_name):
         return index()
     else:
         return display_all_questions()
+
+
 
 
 if __name__ == '__main__':
